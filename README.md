@@ -5,3 +5,4 @@ But, I thought it would be cool to make a personal website.
 My friends know I am something of a LinkedIn warrior, and LinkedIn is fine, but it doesn't really let me display my many projects in full.
 
 I think a website is a nice alternative.
+bipulsoti.github.io
