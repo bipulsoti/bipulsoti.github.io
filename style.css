@@ -66,6 +66,15 @@ body {
     color: #666;
 }
 
+.name-section distinct {
+
+    margin-top: 20px;
+
+    font-size: 1.25rem;
+
+    color: #004;
+}
+
 .photo-container {
 
     position: relative;
