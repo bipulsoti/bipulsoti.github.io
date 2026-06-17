@@ -4,4 +4,4 @@ I don't use GitHub very much, at least right now (Summer 2026), because I don't 
 
 I think a website is a nice alternative.
 
-bipulsoti.github.io
+(bipulsoti.github.io)
