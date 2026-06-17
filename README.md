@@ -1,1 +1,0 @@
-# bipulsoti.github.io
