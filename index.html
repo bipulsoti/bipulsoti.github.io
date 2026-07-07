@@ -1,62 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bipul Soti</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bipul Soti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #f6f8fb;
+    --grid-line: rgba(59, 76, 122, 0.11);
+    --ink: #1e2a3a;
+    --ink-soft: #4b5872;
+    --ink-faint: #7c869c;
+    --red: #a6402e;
+    --red-soft: #b85d4d;
+    --rule-x: 88px;
+  }
 
-    <link rel="stylesheet" href="style.css">
+  *{ box-sizing: border-box; }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background-color: var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 26px),
+      repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 26px);
+    color: var(--ink);
+    font-family: "Spectral", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* the notebook margin */
+  body::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: var(--rule-x);
+    width: 1px;
+    background: rgba(166, 64, 46, 0.55);
+    z-index: 0;
+  }
+
+  @media (max-width: 1000px){
+    :root{ --rule-x: 34px; }
+  }
+
+  main{
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 64px 32px 90px calc(var(--rule-x) + 28px);
+  }
+
+  .margins{
+    position: absolute;
+    left: 0;
+    width: calc(var(--rule-x) - 10px);
+    text-align: right;
+    padding-right: 10px;
+    font-family: "Caveat", cursive;
+    font-size: 20px;
+    line-height: 1.1;
+    color: var(--red);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1000px){
+    .margins{ display: none; }
+  }
+
+  h1{
+    font-weight: 600;
+    font-size: 32px;
+    margin: 0 0 6px 0;
+    letter-spacing: 0.2px;
+  }
+
+  .tagline{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 22px 0;
+  }
+
+  nav{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  nav a{
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-faint);
+    padding-bottom: 1px;
+  }
+
+  nav a:hover{
+    border-bottom-color: var(--red);
+    color: var(--red);
+  }
+
+  nav .sep{
+    color: var(--ink-faint);
+    margin: 0 10px;
+  }
+
+  p{ margin: 0 0 20px 0; }
+
+  a.inline{
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-faint);
+  }
+  a.inline:hover{ border-bottom-color: var(--red); color: var(--red); }
+
+  h2{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin: 46px 0 16px 0;
+    position: relative;
+  }
+
+  h2::after{
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--grid-line);
+    margin-top: 8px;
+  }
+
+  .entry{
+    margin-bottom: 26px;
+  }
+
+  .entry-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .entry-title{
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .entry-meta{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .entry p{
+    margin-top: 6px;
+    margin-bottom: 0;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+
+  .pub{
+    font-size: 15px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .pub a{ color: var(--ink-soft); }
+
+  footer{
+    margin-top: 70px;
+    padding-top: 18px;
+    border-top: 1px solid var(--grid-line);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  footer a{ color: var(--ink-faint); }
+  footer a:hover{ color: var(--red); }
+
+  .photo-wrap{
+    float: right;
+    width: 168px;
+    margin: 4px 0 18px 28px;
+    position: relative;
+  }
+
+  .photo-frame{
+    background: #fdfcf9;
+    padding: 10px 10px 26px 10px;
+    box-shadow: 0 6px 16px rgba(30, 42, 58, 0.18);
+    transform: rotate(3deg);
+    position: relative;
+  }
+
+  .photo-frame img{
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    filter: sepia(8%) contrast(102%);
+  }
+
+  .photo-caption{
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: "Caveat", cursive;
+    font-size: 15px;
+    color: var(--ink-faint);
+  }
+
+  /* tape strip, top-left corner */
+  .tape{
+    position: absolute;
+    width: 70px;
+    height: 26px;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(230, 221, 176, 0.75) 0 6px,
+      rgba(214, 203, 150, 0.75) 6px 12px
+    );
+    opacity: 0.8;
+    box-shadow: 0 1px 2px rgba(30, 42, 58, 0.15);
+  }
+
+  .tape.tl{
+    top: -12px;
+    left: -18px;
+    transform: rotate(-40deg);
+  }
+
+  .tape.br{
+    bottom: 10px;
+    right: -20px;
+    transform: rotate(-40deg);
+    width: 56px;
+    height: 22px;
+  }
+
+  @media (max-width: 1000px){
+    .photo-wrap{
+      float: none;
+      margin: 0 auto 28px auto;
+      width: 148px;
+    }
+  }
+
+  /* the easter egg: a scribbled note tucked in the footer margin */
+  .doodle{
+    font-family: "Caveat", cursive;
+    font-size: 20px;
+    color: var(--red-soft);
+    text-decoration: none;
+    transform: rotate(-3deg);
+    display: inline-block;
+    opacity: 0.85;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .doodle:hover{
+    opacity: 1;
+    transform: rotate(-3deg) scale(1.05);
+  }
+</style>
 </head>
 <body>
 
-<header class="hero">
+<main>
 
-    <div class="name-section">
-        <h1>Bipul Soti</h1>
-        <p>Currently Working On:</p> <distinct>CD8+ T Cell Activation and Memory</distinct>
-        <p><small>(754)236-5011 + bipulrajsoti@gmail.com</small></p>
+  <span class="margins" style="top: 40px;"> <a href=https://www.youtube.com/watch?v=-xqEABqaEuo target="_blank">When will you do what you must?</a></span>
+
+  <h1>Bipul Soti</h1>
+  <p class="tagline">My Online Portfolio!</p>
+
+  <nav>
+    <a href="mailto:bipulrajsoti@gmail.com">email</a>
+    <span class="sep">/</span>
+    <a href="https://www.linkedin.com/in/bipul-soti-504163217/" target="_blank">linkedin</a>
+    <span class="sep">/</span>
+    <a href="https://github.com/bipulsoti" target="_blank">github [labwork currently not public]</a>
+  </nav>
+
+  <div class="photo-wrap">
+    <div class="photo-frame">
+      <span class="tape tl"></span>
+      <img src="assets/photo.jpg" alt="Bipul Soti">
+      <span class="photo-caption">who is this guy?</span>
+      <span class="tape br"></span>
     </div>
+  </div>
 
-    <div class="photo-container">
+  <p>
+    I'm an senior at Yale, studying Molecular Biophysics &amp; Biochemistry
+    with a concentration in Chemical Biology, and a certificate in Medieval Studies. I'm interested in how our immune system uses complex (and sometimes counterintuitive) biochemical signals to manage the insanely difficult task of keeping us alive.  
+</p>
 
-        <img
-            src="assets/profile.jpg"
-            alt="Profile Photo"
-            class="profile-photo">
+  <p>
+    Outside science, I think a lot about the Middle Ages; I'm especially interested in questions of how Medieval conceptions of self and other influence how we think today! I'm also very involved with comedy at Yale. I regularly perform stand-up shows and was previously the Online Editor in Chief of <a class="inline" href="https://yalerecord.org" target="_blank">The Yale Record</a>, the world's oldest English-languge comedy magazine. I was also Co-President of the <a class="inline" href="https://www.instagram.com/nssyale" target="_blank">Yale Nepali Students Society</a> and had the privilege of supporting our community on campus during a recent period of great uncertainty in Nepal.
+  </p>
 
-        <img
-            src="assets/tape.png"
-            alt=""
-            class="tape">
+<h2 id="thoughts">Some Things I've Been Thinking About</h2>
 
+<nav>
+    <a href="https://en.wikipedia.org/wiki/Autoimmune_regulator" target="_blank">The AIRE protein is insane</a>
+    <span class="sep">/</span>
+    <a href="https://www.cell.com/cell/abstract/S0092-8674(26)00567-2" target="_blank">Worm cells explode to kill</a>
+    <span class="sep">/</span>
+    <a href="https://en.wikipedia.org/wiki/The_Decameron" target="_blank">The true Medieval Italian "Comedy"</a>
+  </nav>
+
+
+  <h2 id="research">Research</h2>
+
+  <div class="entry">
+    <span class="margins" style="top: inherit;"></span>
+    <div class="entry-head">
+      <span class="entry-title">Carrie Lucas Lab, Yale University</span>
+      <span class="entry-meta">May 2024 — present</span>
     </div>
-
-</header>
-
-<section>
-    <h2>About Me</h2>
     <p>
-        Hello! I'm a student at Yale University studying Molecular Biophysics and Biochemistry + Medieval Studies. I'm particularly interested in the 
-        biochemistry of the adaptive immune system. Currently, I work on interferon gamma signaling and how it influences the dynamics of CD8+ T cell 
-        activation and memory. I do this work at the <a href="https://www.carrielucaslab.org">laboratory of Prof. Carrie Lucas</a> 
-        at the Yale School of Medicine. My interests are generally in the world of immune regulation and signaling. This includes 
-        the function of the AIRE protein and the crosstalk between Th1, Th2, and Th17 cells. In addition to my interests in classical immunology, I'm eager
-        to explore the applications of organic chemistry in my work (we've recently started thinking about degrons at our lab, which is very exciting).
-
-        Outside science, I keep myself busy through writing. When it comes to Medieval Studies, I have written about Dante's Comedy and the Black Death.
-        These are topics I feel very strongly about and you can learn more about them below. Some of my other projects include the screenplay for the Yale 
-        Symphony Orchestra's 2025 Halloween Show, a lengthy article about the history of eugenics at Yale, and my work as the Online Editor in Chief of the
-        Yale Record.
+    In the <a class="inline" href="https://medicine.yale.edu/profile/carrie-lucas/" target="_blank">Lucas Lab</a>,
+    I study how CD8+ T cells sustain immunological memory, using
+    <a class="inline" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8985851/" target="_blank">ELF4-deficiency</a>,
+    an extremely rare inborn error of immunity, as a lens onto immunological signaling. I use several molecular, cellular, and computational tools/techniques for this project and I have been supported by multiple fellowships.
     </p>
-</section>
+  </div>
 
-<section 
-    <h2>Projects</h2>
-</section>
+  <div class="entry">
+    <div class="entry-head">
+      <span class="entry-title">Robin Berlin Fellowship</span>
+      <span class="entry-meta">May 2025 — Dec 2025</span>
+    </div>
+    <p>
+      Awarded to study both immunology and the history of the Black Death. This culminated in a paper re: antisemitism for Prof. Ivan Marcus' class "Medieval Jews, Christians, and Muslims In Conversation." This paper was my first foray into historiography. The full essay has an obnoxiously long title and you can read it <a class="inline" href=https://docs.google.com/document/d/1H8EGQQqVGEh93I7i70mf51K5w8kZleXZY6SH7a4jfPw/edit?usp=sharing target="_blank">here</a>; a "Cliffnotes" version presentation I gave the class is linked <a class="inline" href="https://docs.google.com/presentation/d/1MazVYRiv_5PzwoPYmSOgHcZEMfRzho73JmAM_cEDCCM/edit?usp=sharing" target="_blank">here</a>!
+    </p>
+  </div>
 
-<section>
-    <h2>Contact</h2>
-</section>
+  <h2 id="writing">Other Intellectual Adventures</h2>
+
+  <div class="entry">
+    <div class="entry-head">
+      <span class="entry-title">Screenwriter for the Yale Symphony Orchestra's <i>2025 Halloween Show</i> </span>
+      <span class="entry-meta">Mar 2025 — Oct 2025</span>
+    </div>
+    <p>
+      My friends Diana Yang, Ray Nassar, and I wrote the screenplay for the most-attended student performance of the year (>2,500 ticketed attendees + some others who managed to sneak in). The Halloween Show is a silent film set to a soundtrack performed by the Yale Symphony Orchestra. We had a lot of fun doing this; getting to write lines for Sir Paul McCartney was especially cool. I'm not allowed to distribute the movie but you can read the screenplay: <a class="inline" href="https://docs.google.com/document/d/15PsZRrapJV1a0SQqDGblBXCZM56l-90mvKTaSQUL91g/edit?usp=sharing" target="_blank">Lord of Yale: Fellowship of the GPT</a>! Many thanks to Mina Chang, Juliet Mandelbrot, and Ben Graham for bringing our vision to life.
+    </p>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <span class="entry-title">A Very Close Reading of Dante's <i>Comedy</i></span>
+      <span class="entry-meta">Sep 2024 — April 2025</span>
+    </div>
+    <p>
+     I am a big fan of the 13th century Italian poet Dante Alighieri. I came to love his work through Prof. Heather Webb's course, "Dante in Translation." The final essay I wrote for this class, titled <a class="inline" href="https://docs.google.com/document/d/1fsZTmZGXqj2xK_QiIL4Y8q01wXUUHhg9RKylDIOpBKk/edit?usp=sharing" target="_blank" >"The Price of Paradise: Female Sexuality, Free Will, and Moral Agency in Dante's <i>Comedy</i>"</a> won the 2024-2025 prize for the best essay in the Italian Studies department. The presentation I gave for a student symposium is linked <a class="inline" href="https://docs.google.com/presentation/d/1YG7JnDC1EKEFNiWNgI-LYV7Cs5B2PwL1_IIh5cl4yNA/edit?usp=sharing" target="_blank">here!</a>
+    </p>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <span class="entry-title">Investigating of the History of Eugenics at Yale</span>
+      <span class="entry-meta">Feb 2025</span>
+    </div>
+    <p>
+      I spent a good portion of February 2025 thinking about the history of eugenics at Yale. I interviewed the students and professors who are working to make sense of our university's complex history surrounding race and race science. I compiled my findings into an article for <i>The Yale Herald</i> titled <a class="inline" href="http://yale-herald.com/2025/02/23/genetic-fragments-synthesizing-yales-history-of-eugenics/" target="_blank">"Genetic Fragments: Synthesizing Yale’s History of Eugenics."</a> This article is now used as instructional material for Professor Daniel Martinez HoSang's class "Eugenics and its Afterlives."
+    </p>
+  </div>
+
+  <h2 id="publications">Scientific Publications</h2>
+
+  <p class="pub">
+    Pintor, S., Lopez, A., Flores, D., Lozoya, B., Soti, B., Pokhrel, R., Negrete, J.,
+    Persans, M. W., Gilkerson, R., Gunn, B., &amp; Keniry, M. (2023). FOXO1 promotes
+    the expression of canonical WNT target genes in examined basal-like breast and
+    glioblastoma multiforme cancer cells. <em>FEBS Open Bio, 13</em>(11), 2108–2123.
+    <a href="https://doi.org/10.1002/2211-5463.13696" target="_blank">doi.org/10.1002/2211-5463.13696</a>
+  </p>
+
+  <footer>
+    <span>Set in Spectral, IBM Plex Mono, and Caveat · ruled like a lab notebook (but not <i>my</i> lab notebook; that's all online) · hosted on GitHub Pages</span>
+    <a class="doodle" href="https://open.spotify.com/user/wku657e5y7z4sg3ffj2453uz9" target="_blank" rel="noopener" title="what am I listening to?">𝄞 some more for you?</a>
+  </footer>
+
+</main>
+
+</body>
+</html>
